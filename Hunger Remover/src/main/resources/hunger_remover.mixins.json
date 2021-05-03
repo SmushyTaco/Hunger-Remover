@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "com.smushytaco.hunger_remover.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinEntity",
+    "MixinItem",
+    "MixinItemSettings",
+    "MixinLivingEntity",
+    "MixinPlayerEntity"
+  ],
+  "client": [
+    "client.MixinInGameHud"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

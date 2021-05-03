@@ -1,5 +1,2 @@
 # Hunger Remover
-
-Removes the hunger bar and makes food restore health
-
-![](https://i.imgur.com/TNawUfu.gif)
+Mod information: https://www.curseforge.com/minecraft/mc-mods/hunger-remover/
