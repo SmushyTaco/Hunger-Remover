@@ -13,7 +13,7 @@ public abstract class MixinInGameHud {
     @Shadow
     protected abstract LivingEntity getRiddenEntity();
     @Redirect(method = "renderStatusBars", at = @At(value = "INVOKE",target = "Lnet/minecraft/client/gui/hud/InGameHud;getHeartCount(Lnet/minecraft/entity/LivingEntity;)I"))
-    private int onGetMountHealth(InGameHud hud, LivingEntity entity) {
+    private int hookRenderStatusBars(InGameHud hud, LivingEntity entity) {
         if (HungerRemover.INSTANCE.getConfig().getDisableMod()) return getHeartCount(getRiddenEntity());
         // This tricks the code into thinking that there will be a mount
         // health bar to be rendered instead of the hunger bar.
