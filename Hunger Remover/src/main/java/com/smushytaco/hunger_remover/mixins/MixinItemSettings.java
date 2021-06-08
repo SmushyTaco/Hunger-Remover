@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Item.Settings.class)
 public abstract class MixinItemSettings {
     @Shadow
-    private FoodComponent foodComponent;
+    FoodComponent foodComponent;
     @Inject(method = "food", at = @At("HEAD"))
     private void hookFood(FoodComponent foodComponent, CallbackInfoReturnable<Item.Settings> info) {
         HungerRemover.INSTANCE.initializeConfig();
