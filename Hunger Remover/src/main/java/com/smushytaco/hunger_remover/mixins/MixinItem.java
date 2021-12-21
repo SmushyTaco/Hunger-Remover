@@ -11,11 +11,7 @@ public abstract class MixinItem {
     @Inject(method = "getMaxUseTime", at = @At("HEAD"), cancellable = true)
     private void hookGetMaxUseTime(ItemStack itemStack, CallbackInfoReturnable<Integer> cir) {
         if (HungerRemover.INSTANCE.getConfig().getDisableMod()) return;
-        if (HungerRemover.INSTANCE.getConfig().getEatInstantly()) {
-            if (itemStack.getItem().isFood()) {
-                // Food items don't work with 0, so 1 is the next best thing.
-                cir.setReturnValue(1);
-            }
-        }
+        // Food items don't work with 0, so 1 is the next best thing.
+        if (HungerRemover.INSTANCE.getConfig().getEatInstantly() && itemStack.getItem().isFood()) cir.setReturnValue(1);
     }
 }
