@@ -11,11 +11,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MixinEntity {
     @Inject(method = "isSprinting", at = @At("HEAD"), cancellable = true)
     private void hookIsSprinting(CallbackInfoReturnable<Boolean> cir) {
-        if (HungerRemover.INSTANCE.getConfig().getDisableMod()||
-                !HungerRemover.INSTANCE.getConfig().getCantSprint()) return;
+        if (HungerRemover.INSTANCE.getConfig().getDisableMod()|| !HungerRemover.INSTANCE.getConfig().getCantSprint()) return;
         Entity entity = (Entity) (Object) this;
-        if (!(entity instanceof PlayerEntity playerEntity)) return;
-        if (playerEntity.isCreative() || playerEntity.isSpectator()) return;
+        if (!(entity instanceof PlayerEntity playerEntity) || playerEntity.isCreative() || playerEntity.isSpectator()) return;
         cir.setReturnValue(false);
     }
 }
