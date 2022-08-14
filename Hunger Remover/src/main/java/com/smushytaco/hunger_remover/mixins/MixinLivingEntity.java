@@ -6,7 +6,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(LivingEntity.class)
-@SuppressWarnings("ConstantConditions")
 public abstract class MixinLivingEntity {
     @ModifyVariable(method = "setSprinting", at = @At("HEAD"), argsOnly = true)
     private boolean hookSetSprinting(boolean sprinting) {

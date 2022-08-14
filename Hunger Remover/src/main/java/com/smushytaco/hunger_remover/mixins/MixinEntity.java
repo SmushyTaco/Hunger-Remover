@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Entity.class)
-@SuppressWarnings("ConstantConditions")
 public abstract class MixinEntity {
     @Inject(method = "isSprinting", at = @At("HEAD"), cancellable = true)
     private void hookIsSprinting(CallbackInfoReturnable<Boolean> cir) {
