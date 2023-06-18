@@ -1,17 +1,13 @@
 package com.smushytaco.hunger_remover.mixins;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.smushytaco.hunger_remover.HungerRemover;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Item.class)
 public abstract class MixinItem {
-    @Inject(method = "getMaxUseTime", at = @At("HEAD"), cancellable = true)
-    private void hookGetMaxUseTime(ItemStack itemStack, CallbackInfoReturnable<Integer> cir) {
-        if (HungerRemover.INSTANCE.getConfig().getDisableMod()) return;
-        // Food items don't work with 0, so 1 is the next best thing.
-        if (HungerRemover.INSTANCE.getConfig().getEatInstantly() && itemStack.getItem().isFood()) cir.setReturnValue(1);
-    }
+    @ModifyReturnValue(method = "getMaxUseTime", at = @At("RETURN"))
+    @SuppressWarnings("unused")
+    private int hookGetMaxUseTime(int original, ItemStack itemStack) { return HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getEatInstantly() || !itemStack.getItem().isFood() ? original : 1; }
 }

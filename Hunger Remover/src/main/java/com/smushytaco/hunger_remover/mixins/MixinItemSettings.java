@@ -15,14 +15,12 @@ public abstract class MixinItemSettings {
     @Inject(method = "food", at = @At("HEAD"))
     private void hookFood(FoodComponent foodComponent, CallbackInfoReturnable<Item.Settings> info) {
         HungerRemover.INSTANCE.initializeConfig();
-        if (HungerRemover.INSTANCE.getConfig().getDisableMod()) return;
-        if (HungerRemover.INSTANCE.getConfig().getFoodCantStack() && foodComponent != null) ((Item.Settings) (Object) this).maxCount(1);
+        if (HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getFoodCantStack() || foodComponent == null) return;
+        ((Item.Settings) (Object) this).maxCount(1);
     }
     @ModifyVariable(method = "maxCount", at = @At("HEAD"), argsOnly = true)
     private int hookMaxCount(int maxCount) {
         HungerRemover.INSTANCE.initializeConfig();
-        if (HungerRemover.INSTANCE.getConfig().getDisableMod()) return maxCount;
-        if (HungerRemover.INSTANCE.getConfig().getFoodCantStack() && foodComponent != null) return 1;
-        return maxCount;
+        return HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getFoodCantStack() || foodComponent == null ? maxCount : 1;
     }
 }
