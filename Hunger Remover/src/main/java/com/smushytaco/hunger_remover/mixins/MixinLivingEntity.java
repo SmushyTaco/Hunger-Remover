@@ -8,9 +8,5 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity {
     @ModifyVariable(method = "setSprinting", at = @At("HEAD"), argsOnly = true)
-    private boolean hookSetSprinting(boolean sprinting) {
-        LivingEntity livingEntity = (LivingEntity) (Object) this;
-        if (HungerRemover.INSTANCE.getConfig().getDisableMod()|| !HungerRemover.INSTANCE.getConfig().getCantSprint() || !(livingEntity instanceof PlayerEntity playerEntity) || playerEntity.isCreative() || playerEntity.isSpectator()) return sprinting;
-        return false;
-    }
+    private boolean hookSetSprinting(boolean sprinting) { return (HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getCantSprint() || !(((LivingEntity) (Object) this) instanceof PlayerEntity playerEntity) || playerEntity.isCreative() || playerEntity.isSpectator()) && sprinting; }
 }

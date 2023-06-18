@@ -16,10 +16,9 @@ class NoHungerManager(private val player: PlayerEntity) : HungerManager() {
     private fun add(health: Int) = player.heal(health.toFloat())
     override fun add(hunger: Int, saturation: Float) = add(hunger)
     override fun eat(item: Item, itemStack: ItemStack) {
-        if (item.isFood) {
-            val foodComponent = item.foodComponent
-            if (foodComponent != null) add(foodComponent.hunger)
-        }
+        if (!item.isFood) return
+        val foodComponent = item.foodComponent ?: return
+        add(foodComponent.hunger)
     }
     override fun getSaturationLevel() = MAX_SATURATION_LEVEL
     companion object {
