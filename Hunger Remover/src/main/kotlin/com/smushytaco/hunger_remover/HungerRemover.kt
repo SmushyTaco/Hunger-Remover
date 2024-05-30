@@ -8,9 +8,7 @@ object HungerRemover : ModInitializer {
     const val MOD_ID = "hunger_remover"
     lateinit var config: ModConfiguration
         private set
-    override fun onInitialize() {
-        initializeConfig()
-    }
+    override fun onInitialize() {}
     fun initializeConfig() {
         if (::config.isInitialized) return
         AutoConfig.register(ModConfiguration::class.java) { definition: Config, configClass: Class<ModConfiguration> ->
