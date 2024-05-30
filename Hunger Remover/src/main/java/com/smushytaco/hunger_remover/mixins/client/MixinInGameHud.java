@@ -9,6 +9,5 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(InGameHud.class)
 public abstract class MixinInGameHud {
     @WrapOperation(method = "renderStatusBars", at = @At(value = "INVOKE",target = "Lnet/minecraft/client/gui/hud/InGameHud;getHeartCount(Lnet/minecraft/entity/LivingEntity;)I"))
-    @SuppressWarnings("unused")
     private int hookRenderStatusBars(InGameHud instance, LivingEntity entity, Operation<Integer> original) { return HungerRemover.INSTANCE.getConfig().getDisableMod() ? original.call(instance, entity) : -1; }
 }

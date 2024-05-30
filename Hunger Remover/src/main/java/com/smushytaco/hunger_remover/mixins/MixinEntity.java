@@ -8,6 +8,5 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(Entity.class)
 public abstract class MixinEntity {
     @ModifyReturnValue(method = "isSprinting", at = @At("RETURN"))
-    @SuppressWarnings("unused")
     private boolean hookIsSprinting(boolean original) { return (HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getCantSprint() || !(((Entity) (Object) this) instanceof PlayerEntity playerEntity) || playerEntity.isCreative() || playerEntity.isSpectator()) && original; }
 }
