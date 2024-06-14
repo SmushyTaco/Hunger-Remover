@@ -1,8 +1,7 @@
 package com.smushytaco.hunger_remover
-import net.minecraft.component.DataComponentTypes
+import net.minecraft.component.type.FoodComponent
 import net.minecraft.entity.player.HungerManager
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 class NoHungerManager(private val player: PlayerEntity) : HungerManager() {
     override fun setSaturationLevel(saturationLevel: Float) {}
@@ -15,10 +14,7 @@ class NoHungerManager(private val player: PlayerEntity) : HungerManager() {
     override fun writeNbt(nbt: NbtCompound?) {}
     private fun add(health: Int) = player.heal(health.toFloat())
     override fun add(hunger: Int, saturation: Float) = add(hunger)
-    override fun eat(itemStack: ItemStack) {
-        val foodComponent = itemStack.get(DataComponentTypes.FOOD) ?: return
-        add(foodComponent.nutrition)
-    }
+    override fun eat(foodComponent: FoodComponent) { add(foodComponent.nutrition) }
     override fun getSaturationLevel() = MAX_SATURATION_LEVEL
     companion object {
         private const val MAX_FOOD_LEVEL = 20
