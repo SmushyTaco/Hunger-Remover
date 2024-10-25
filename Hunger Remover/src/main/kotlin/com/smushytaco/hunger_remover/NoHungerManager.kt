@@ -3,10 +3,11 @@ import net.minecraft.component.type.FoodComponent
 import net.minecraft.entity.player.HungerManager
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.server.network.ServerPlayerEntity
 class NoHungerManager(private val player: PlayerEntity) : HungerManager() {
     override fun setSaturationLevel(saturationLevel: Float) {}
     override fun isNotFull() = player.health < player.maxHealth
-    override fun update(playerEntity: PlayerEntity) {}
+    override fun update(player: ServerPlayerEntity) {}
     override fun addExhaustion(exhaustion: Float) {}
     override fun getFoodLevel() = MAX_FOOD_LEVEL
     override fun setFoodLevel(foodLevel: Int) {}
