@@ -2,9 +2,11 @@ package com.smushytaco.hunger_remover.mixins;
 import com.smushytaco.hunger_remover.HungerRemover;
 import net.minecraft.component.ComponentMap;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.item.Item;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,11 +15,12 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Item.Settings.class)
 public abstract class MixinItemSettings {
+    @Final
     @Shadow
     @Nullable
     private ComponentMap.Builder components;
-    @Inject(method = "food", at = @At("HEAD"))
-    private void hookFood(FoodComponent foodComponent, CallbackInfoReturnable<Item.Settings> info) {
+    @Inject(method = "food(Lnet/minecraft/component/type/FoodComponent;Lnet/minecraft/component/type/ConsumableComponent;)Lnet/minecraft/item/Item$Settings;", at = @At("HEAD"))
+    private void hookFood(FoodComponent foodComponent, ConsumableComponent consumableComponent, CallbackInfoReturnable<Item.Settings> cir) {
         if (HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getFoodCantStack() || foodComponent == null) return;
         ((Item.Settings) (Object) this).maxCount(1);
     }
