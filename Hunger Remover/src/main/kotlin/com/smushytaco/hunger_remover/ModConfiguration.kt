@@ -7,6 +7,7 @@ import io.wispforest.owo.config.annotation.*
 class ModConfiguration {
     @JvmField
     @Sync(Option.SyncMode.OVERRIDE_CLIENT)
+    @RestartRequired
     var disableMod = false
     @JvmField
     @Sync(Option.SyncMode.OVERRIDE_CLIENT)
@@ -26,8 +27,10 @@ class ModConfiguration {
     @JvmField
     var moveArmorBarToHungerBar = true
     @JvmField
+    @RestartRequired
     var replaceAllHungerWithPoison = true
     @JvmField
+    @RestartRequired
     var replaceHungerFromFoodWithPoison = true
     companion object {
         @JvmStatic
