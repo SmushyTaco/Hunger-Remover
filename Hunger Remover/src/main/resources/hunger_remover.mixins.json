@@ -7,6 +7,7 @@
     "MixinEntity",
     "MixinItem",
     "MixinItemSettings",
+    "MixinItemStack",
     "MixinLivingEntity",
     "MixinPlayerEntity"
   ],
