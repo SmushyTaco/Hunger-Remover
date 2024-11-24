@@ -3,12 +3,15 @@
   "package": "com.smushytaco.hunger_remover.mixins",
   "compatibilityLevel": "JAVA_${java}",
   "mixins": [
+    "MixinApplyEffectsConsumeEffect",
     "MixinEntity",
     "MixinHungerManager",
     "MixinItem",
     "MixinItemStack",
     "MixinLivingEntity",
-    "MixinPlayerEntity"
+    "MixinPlayerEntity",
+    "MixinStatusEffectInstance",
+    "StatusEffectInstanceAccessor"
   ],
   "client": [
     "client.MixinInGameHud"

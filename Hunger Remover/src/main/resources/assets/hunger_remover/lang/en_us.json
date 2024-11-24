@@ -6,5 +6,7 @@
   "text.autoconfig.hunger_remover.option.maxFoodStackCount": "Max Food Stack Count",
   "text.autoconfig.hunger_remover.option.cantSprint": "Can't Sprint",
   "text.autoconfig.hunger_remover.option.hideHungerBar": "Hide Hunger Bar",
-  "text.autoconfig.hunger_remover.option.moveArmorBarToHungerBar": "Move Armor Bar To Hunger Bar"
+  "text.autoconfig.hunger_remover.option.moveArmorBarToHungerBar": "Move Armor Bar To Hunger Bar",
+  "text.autoconfig.hunger_remover.option.replaceAllHungerWithPoison": "Replace All Hunger With Poison",
+  "text.autoconfig.hunger_remover.option.replaceHungerFromFoodWithPoison": "Replace Hunger From Food With Poison"
 }

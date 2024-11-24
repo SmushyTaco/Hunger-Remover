@@ -10,7 +10,8 @@ object HungerRemover : ModInitializer {
     const val MOD_ID = "hunger_remover"
     lateinit var config: ModConfiguration
         private set
-    override fun onInitialize() {
+    override fun onInitialize() {}
+    fun initializeConfig() {
         AutoConfig.register(ModConfiguration::class.java) { definition: Config, configClass: Class<ModConfiguration> ->
             GsonConfigSerializer(definition, configClass)
         }
