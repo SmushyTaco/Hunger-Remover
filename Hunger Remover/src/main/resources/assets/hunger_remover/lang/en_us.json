@@ -2,6 +2,7 @@
   "text.autoconfig.hunger_remover.title": "Hunger Remover Configuration",
   "text.autoconfig.hunger_remover.option.disableMod": "Disable Mod",
   "text.autoconfig.hunger_remover.option.eatInstantly": "Eat Instantly",
-  "text.autoconfig.hunger_remover.option.foodCantStack": "Food Can't Stack",
+  "text.autoconfig.hunger_remover.option.modifyMaxFoodStackCount": "Modify Max Food Stack Count",
+  "text.autoconfig.hunger_remover.option.maxFoodStackCount": "Max Food Stack Count",
   "text.autoconfig.hunger_remover.option.cantSprint": "Can't Sprint"
 }
