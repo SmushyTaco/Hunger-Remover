@@ -22,15 +22,6 @@
         "adapter": "kotlin",
         "value": "com.smushytaco.hunger_remover.HungerRemover"
       }
-    ],
-    "preLaunch": [
-      {
-        "adapter": "kotlin",
-        "value": "com.smushytaco.hunger_remover.HungerRemoverPreLaunch"
-      }
-    ],
-    "modmenu": [
-      "com.smushytaco.hunger_remover.configuration_support.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -42,9 +33,6 @@
     "fabric-language-kotlin": ">=${fabric_language_kotlin}",
     "minecraft": ">=${minecraft}",
     "java": ">=${java}",
-    "cloth-config2": ">=${clothconfig}"
-  },
-  "suggests": {
-    "modmenu": ">=${modmenu}"
+    "owo": ">=${owo_version}"
   }
 }
