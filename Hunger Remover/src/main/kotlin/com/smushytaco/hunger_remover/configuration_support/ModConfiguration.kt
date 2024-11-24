@@ -11,4 +11,6 @@ class ModConfiguration: ConfigData {
     val cantSprint = false
     val hideHungerBar = true
     val moveArmorBarToHungerBar = true
+    val replaceAllHungerWithPoison = true
+    val replaceHungerFromFoodWithPoison = true
 }

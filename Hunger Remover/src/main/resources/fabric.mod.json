@@ -23,6 +23,12 @@
         "value": "com.smushytaco.hunger_remover.HungerRemover"
       }
     ],
+    "preLaunch": [
+      {
+        "adapter": "kotlin",
+        "value": "com.smushytaco.hunger_remover.HungerRemoverPreLaunch"
+      }
+    ],
     "modmenu": [
       "com.smushytaco.hunger_remover.configuration_support.ModMenuIntegration"
     ]

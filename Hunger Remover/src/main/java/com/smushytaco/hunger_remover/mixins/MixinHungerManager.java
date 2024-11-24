@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(HungerManager.class)
-public class MixinHungerManager implements HungerManagerPlayerEntityAccess {
+public abstract class MixinHungerManager implements HungerManagerPlayerEntityAccess {
     @Unique
     @Nullable
     PlayerEntity playerEntity = null;
