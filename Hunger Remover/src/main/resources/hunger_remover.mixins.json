@@ -3,10 +3,9 @@
   "package": "com.smushytaco.hunger_remover.mixins",
   "compatibilityLevel": "JAVA_${java}",
   "mixins": [
-    "ComponentMapBuilderAccessor",
     "MixinEntity",
+    "MixinHungerManager",
     "MixinItem",
-    "MixinItemSettings",
     "MixinItemStack",
     "MixinLivingEntity",
     "MixinPlayerEntity"

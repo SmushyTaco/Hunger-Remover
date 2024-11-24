@@ -4,5 +4,7 @@
   "text.autoconfig.hunger_remover.option.eatInstantly": "Eat Instantly",
   "text.autoconfig.hunger_remover.option.modifyMaxFoodStackCount": "Modify Max Food Stack Count",
   "text.autoconfig.hunger_remover.option.maxFoodStackCount": "Max Food Stack Count",
-  "text.autoconfig.hunger_remover.option.cantSprint": "Can't Sprint"
+  "text.autoconfig.hunger_remover.option.cantSprint": "Can't Sprint",
+  "text.autoconfig.hunger_remover.option.hideHungerBar": "Hide Hunger Bar",
+  "text.autoconfig.hunger_remover.option.moveArmorBarToHungerBar": "Move Armor Bar To Hunger Bar"
 }

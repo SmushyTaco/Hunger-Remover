@@ -9,4 +9,6 @@ class ModConfiguration: ConfigData {
     val modifyMaxFoodStackCount = false
     val maxFoodStackCount = 1
     val cantSprint = false
+    val hideHungerBar = true
+    val moveArmorBarToHungerBar = true
 }
