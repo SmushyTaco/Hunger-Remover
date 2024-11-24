@@ -3,7 +3,7 @@
   "id": "hunger_remover",
   "version": "${version}",
   "name": "Hunger Remover",
-  "description": "Removes the hunger bar and makes food restore health. There's an option in the config to disable sprinting, an option in the config that makes food stack to only 1 (Restart required), an option in the config that makes you eat instantly, and an option in the config to disable the entire mod (Restart required).",
+  "description": "Removes the hunger bar and makes food restore health.",
   "authors": [
     "MrIbby (Original Author)",
     "SmushyTaco (Creator of Fork)"
