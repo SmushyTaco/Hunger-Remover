@@ -1,12 +1,12 @@
 {
-  "text.autoconfig.hunger_remover.title": "Hunger Remover Configuration",
-  "text.autoconfig.hunger_remover.option.disableMod": "Disable Mod",
-  "text.autoconfig.hunger_remover.option.eatInstantly": "Eat Instantly",
-  "text.autoconfig.hunger_remover.option.modifyMaxFoodStackCount": "Modify Max Food Stack Count",
-  "text.autoconfig.hunger_remover.option.maxFoodStackCount": "Max Food Stack Count",
-  "text.autoconfig.hunger_remover.option.cantSprint": "Can't Sprint",
-  "text.autoconfig.hunger_remover.option.hideHungerBar": "Hide Hunger Bar",
-  "text.autoconfig.hunger_remover.option.moveArmorBarToHungerBar": "Move Armor Bar To Hunger Bar",
-  "text.autoconfig.hunger_remover.option.replaceAllHungerWithPoison": "Replace All Hunger With Poison",
-  "text.autoconfig.hunger_remover.option.replaceHungerFromFoodWithPoison": "Replace Hunger From Food With Poison"
+  "text.config.hunger_remover.title": "Hunger Remover Configuration",
+  "text.config.hunger_remover.option.disableMod": "Disable Mod",
+  "text.config.hunger_remover.option.eatInstantly": "Eat Instantly",
+  "text.config.hunger_remover.option.modifyMaxFoodStackCount": "Modify Max Food Stack Count",
+  "text.config.hunger_remover.option.maxFoodStackCount": "Max Food Stack Count",
+  "text.config.hunger_remover.option.cantSprint": "Can't Sprint",
+  "text.config.hunger_remover.option.hideHungerBar": "Hide Hunger Bar",
+  "text.config.hunger_remover.option.moveArmorBarToHungerBar": "Move Armor Bar To Hunger Bar",
+  "text.config.hunger_remover.option.replaceAllHungerWithPoison": "Replace All Hunger With Poison",
+  "text.config.hunger_remover.option.replaceHungerFromFoodWithPoison": "Replace Hunger From Food With Poison"
 }
