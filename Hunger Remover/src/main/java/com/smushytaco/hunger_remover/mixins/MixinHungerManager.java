@@ -20,6 +20,7 @@ public abstract class MixinHungerManager implements HungerManagerPlayerEntityAcc
     @Nullable
     PlayerEntity playerEntity = null;
     @Override
+    @SuppressWarnings("AddedMixinMembersNamePattern")
     public void setPlayerEntity(@NotNull PlayerEntity playerEntity) { this.playerEntity = playerEntity; }
     @Inject(method = "setSaturationLevel", at = @At("HEAD"), cancellable = true)
     private void hookSetSaturationLevel(float saturationLevel, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
