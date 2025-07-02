@@ -5,8 +5,9 @@ import com.smushytaco.hunger_remover.HungerRemover;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,10 +31,10 @@ public abstract class MixinHungerManager implements HungerManagerPlayerEntityAcc
     private void hookAddExhaustion(float exhaustion, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
     @Inject(method = "setFoodLevel", at = @At("HEAD"), cancellable = true)
     private void hookSetFoodLevel(int foodLevel, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
-    @Inject(method = "readNbt", at = @At("HEAD"), cancellable = true)
-    private void hookReadNbt(NbtCompound nbt, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
-    @Inject(method = "writeNbt", at = @At("HEAD"), cancellable = true)
-    private void hookWriteNbt(NbtCompound nbt, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
+    @Inject(method = "readData", at = @At("HEAD"), cancellable = true)
+    private void hookReadNbt(ReadView view, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
+    @Inject(method = "writeData", at = @At("HEAD"), cancellable = true)
+    private void hookWriteNbt(WriteView view, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
     @Inject(method = "add", at = @At("HEAD"), cancellable = true)
     private void hookAdd(int food, float saturationModifier, CallbackInfo ci) {
         if (HungerRemover.INSTANCE.getConfig().getDisableMod() || playerEntity == null) return;
