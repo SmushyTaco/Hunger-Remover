@@ -29,13 +29,13 @@ public abstract class MixinInGameHud {
         }
     }
     @WrapOperation(method = "renderStatusBars", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderAirBubbles(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/entity/player/PlayerEntity;III)V"))
-    private void hookRenderStatusBarsThree(InGameHud instance, DrawContext context, PlayerEntity player, int heartCount, int top, int left, Operation<Void> original, @Local LivingEntity livingEntity) {
+    private void hookRenderStatusBarsThree(InGameHud instance, DrawContext context, PlayerEntity player, int heartCount, int top, int left, Operation<Void> original, @Local PlayerEntity playerEntity, @Local LivingEntity livingEntity) {
         if (HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getHideHungerBar()) {
             original.call(instance, context, player, heartCount, top, left);
             return;
         }
         int rideableHeartCount = getHeartCount(livingEntity);
-        if (!HungerRemover.INSTANCE.getConfig().getMoveArmorBarToHungerBar()) {
+        if (!HungerRemover.INSTANCE.getConfig().getMoveArmorBarToHungerBar() || playerEntity.getArmor() == 0) {
             original.call(instance, context, player, rideableHeartCount, top, left);
         } else {
             original.call(instance, context, player, rideableHeartCount, rideableHeartCount == 0 ? top - 10 : top, left);
