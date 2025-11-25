@@ -13,7 +13,7 @@
     "issues": "https://www.curseforge.com/minecraft/mc-mods/hunger-remover/issues/",
     "sources": "https://github.com/SmushyTaco/Hunger-Remover/"
   },
-  "license": "GNU Lesser General Public License version 3 (LGPLv3)",
+  "license": "Apache-2.0",
   "icon": "assets/hunger_remover/icon.png",
   "environment": "*",
   "entrypoints": {
