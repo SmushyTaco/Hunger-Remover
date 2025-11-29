@@ -1,13 +1,13 @@
 package com.smushytaco.hunger_remover.mixins;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.core.Holder;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.gen.Accessor;
-@Mixin(StatusEffectInstance.class)
+@Mixin(MobEffectInstance.class)
 public interface StatusEffectInstanceAccessor {
     @Accessor
     @Mutable
-    void setType(RegistryEntry<StatusEffect> type);
+    void setEffect(Holder<MobEffect> type);
 }

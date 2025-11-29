@@ -3,39 +3,39 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.smushytaco.hunger_remover.HungerRemover;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-@Mixin(InGameHud.class)
+@Mixin(Gui.class)
 public abstract class MixinInGameHud {
     @Shadow
-    protected abstract int getHeartCount(@Nullable LivingEntity entity);
+    protected abstract int getVehicleMaxHearts(@Nullable LivingEntity entity);
     @Shadow
     @Nullable
-    protected abstract LivingEntity getRiddenEntity();
-    @WrapOperation(method = "renderStatusBars", at = @At(value = "INVOKE",target = "Lnet/minecraft/client/gui/hud/InGameHud;getHeartCount(Lnet/minecraft/entity/LivingEntity;)I"))
-    private int hookRenderStatusBarsOne(InGameHud instance, LivingEntity entity, Operation<Integer> original) { return HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getHideHungerBar() ? original.call(instance, entity) : -1; }
-    @WrapOperation(method = "renderStatusBars", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderArmor(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/entity/player/PlayerEntity;IIII)V"))
-    private void hookRenderStatusBarsTwo(DrawContext context, PlayerEntity player, int i, int j, int k, int x, Operation<Void> original) {
-        if (HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getHideHungerBar() || !HungerRemover.INSTANCE.getConfig().getMoveArmorBarToHungerBar() || getHeartCount(getRiddenEntity()) != 0) {
+    protected abstract LivingEntity getPlayerVehicleWithHealth();
+    @WrapOperation(method = "renderPlayerHealth", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;getVehicleMaxHearts(Lnet/minecraft/world/entity/LivingEntity;)I"))
+    private int hookRenderStatusBarsOne(Gui instance, LivingEntity entity, Operation<Integer> original) { return HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getHideHungerBar() ? original.call(instance, entity) : -1; }
+    @WrapOperation(method = "renderPlayerHealth", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderArmor(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/entity/player/Player;IIII)V"))
+    private void hookRenderStatusBarsTwo(GuiGraphics context, Player player, int i, int j, int k, int x, Operation<Void> original) {
+        if (HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getHideHungerBar() || !HungerRemover.INSTANCE.getConfig().getMoveArmorBarToHungerBar() || getVehicleMaxHearts(getPlayerVehicleWithHealth()) != 0) {
             original.call(context, player, i, j, k, x);
         } else {
             original.call(context, player, i - 1, 0, 11, x + 101);
         }
     }
-    @WrapOperation(method = "renderStatusBars", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderAirBubbles(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/entity/player/PlayerEntity;III)V"))
-    private void hookRenderStatusBarsThree(InGameHud instance, DrawContext context, PlayerEntity player, int heartCount, int top, int left, Operation<Void> original, @Local PlayerEntity playerEntity, @Local LivingEntity livingEntity) {
+    @WrapOperation(method = "renderPlayerHealth", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderAirBubbles(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/entity/player/Player;III)V"))
+    private void hookRenderStatusBarsThree(Gui instance, GuiGraphics context, Player player, int heartCount, int top, int left, Operation<Void> original, @Local Player playerEntity, @Local LivingEntity livingEntity) {
         if (HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getHideHungerBar()) {
             original.call(instance, context, player, heartCount, top, left);
             return;
         }
-        int rideableHeartCount = getHeartCount(livingEntity);
-        if (!HungerRemover.INSTANCE.getConfig().getMoveArmorBarToHungerBar() || playerEntity.getArmor() == 0) {
+        int rideableHeartCount = getVehicleMaxHearts(livingEntity);
+        if (!HungerRemover.INSTANCE.getConfig().getMoveArmorBarToHungerBar() || playerEntity.getArmorValue() == 0) {
             original.call(instance, context, player, rideableHeartCount, top, left);
         } else {
             original.call(instance, context, player, rideableHeartCount, rideableHeartCount == 0 ? top - 10 : top, left);
