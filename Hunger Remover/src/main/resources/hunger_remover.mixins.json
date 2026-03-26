@@ -7,7 +7,7 @@
     "MixinEntity",
     "MixinHungerManager",
     "MixinItem",
-    "MixinItemStack",
+    "MixinItemInstance",
     "MixinLivingEntity",
     "MixinPlayerEntity",
     "MixinStatusEffectInstance",
