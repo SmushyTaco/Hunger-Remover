@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity {
-    @ModifyVariable(method = "setSprinting", at = @At("HEAD"), argsOnly = true)
+    @ModifyVariable(method = "setSprinting", at = @At("HEAD"), argsOnly = true, name = "isSprinting")
     @SuppressWarnings("ConstantConditions")
-    private boolean hookSetSprinting(boolean sprinting) { return (HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getCantSprint() || !(((LivingEntity) (Object) this) instanceof Player playerEntity) || playerEntity.isCreative() || playerEntity.isSpectator()) && sprinting; }
+    private boolean hookSetSprinting(boolean isSprinting) { return (HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getCantSprint() || !(((LivingEntity) (Object) this) instanceof Player playerEntity) || playerEntity.isCreative() || playerEntity.isSpectator()) && isSprinting; }
 }

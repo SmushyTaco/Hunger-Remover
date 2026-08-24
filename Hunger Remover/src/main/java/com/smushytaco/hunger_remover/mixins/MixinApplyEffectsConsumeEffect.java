@@ -11,9 +11,9 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(ApplyStatusEffectsConsumeEffect.class)
 public abstract class MixinApplyEffectsConsumeEffect {
     @WrapOperation(method = "apply", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;addEffect(Lnet/minecraft/world/effect/MobEffectInstance;)Z"))
-    private boolean hookOnConsume(LivingEntity instance, MobEffectInstance effect, Operation<Boolean> original) {
-        if (HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getReplaceAllHungerWithPoison() && !HungerRemover.INSTANCE.getConfig().getReplaceHungerFromFoodWithPoison() || effect.getEffect() != MobEffects.HUNGER) return original.call(instance, effect);
-        ((StatusEffectInstanceAccessor) effect).setEffect(MobEffects.POISON);
-        return original.call(instance, effect);
+    private boolean hookOnConsume(LivingEntity instance, MobEffectInstance newEffect, Operation<Boolean> original) {
+        if (HungerRemover.INSTANCE.getConfig().getDisableMod() || !HungerRemover.INSTANCE.getConfig().getReplaceAllHungerWithPoison() && !HungerRemover.INSTANCE.getConfig().getReplaceHungerFromFoodWithPoison() || newEffect.getEffect() != MobEffects.HUNGER) return original.call(instance, newEffect);
+        ((StatusEffectInstanceAccessor) newEffect).setEffect(MobEffects.POISON);
+        return original.call(instance, newEffect);
     }
 }

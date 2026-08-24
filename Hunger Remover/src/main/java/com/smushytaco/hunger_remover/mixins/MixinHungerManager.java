@@ -24,17 +24,17 @@ public abstract class MixinHungerManager implements HungerManagerPlayerEntityAcc
     @SuppressWarnings("AddedMixinMembersNamePattern")
     public void setPlayerEntity(@NotNull Player playerEntity) { this.playerEntity = playerEntity; }
     @Inject(method = "setSaturation", at = @At("HEAD"), cancellable = true)
-    private void hookSetSaturationLevel(float saturationLevel, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
+    private void hookSetSaturationLevel(float saturation, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void hookUpdate(ServerPlayer player, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
     @Inject(method = "addExhaustion", at = @At("HEAD"), cancellable = true)
-    private void hookAddExhaustion(float exhaustion, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
+    private void hookAddExhaustion(float amount, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
     @Inject(method = "setFoodLevel", at = @At("HEAD"), cancellable = true)
-    private void hookSetFoodLevel(int foodLevel, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
+    private void hookSetFoodLevel(int food, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
     @Inject(method = "readAdditionalSaveData", at = @At("HEAD"), cancellable = true)
-    private void hookReadNbt(ValueInput view, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
+    private void hookReadNbt(ValueInput input, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
     @Inject(method = "addAdditionalSaveData", at = @At("HEAD"), cancellable = true)
-    private void hookWriteNbt(ValueOutput view, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
+    private void hookWriteNbt(ValueOutput output, CallbackInfo ci) { if (!HungerRemover.INSTANCE.getConfig().getDisableMod()) ci.cancel(); }
     @Inject(method = "eat(IF)V", at = @At("HEAD"), cancellable = true)
     private void hookAdd(int food, float saturationModifier, CallbackInfo ci) {
         if (HungerRemover.INSTANCE.getConfig().getDisableMod() || playerEntity == null) return;
@@ -42,9 +42,9 @@ public abstract class MixinHungerManager implements HungerManagerPlayerEntityAcc
         ci.cancel();
     }
     @Inject(method = "eat(Lnet/minecraft/world/food/FoodProperties;)V", at = @At("HEAD"), cancellable = true)
-    private void hookEat(FoodProperties foodComponent, CallbackInfo ci) {
+    private void hookEat(FoodProperties foodProperties, CallbackInfo ci) {
         if (HungerRemover.INSTANCE.getConfig().getDisableMod() || playerEntity == null) return;
-        playerEntity.heal(foodComponent.nutrition());
+        playerEntity.heal(foodProperties.nutrition());
         ci.cancel();
     }
     @ModifyReturnValue(method = "needsFood", at = @At("RETURN"))

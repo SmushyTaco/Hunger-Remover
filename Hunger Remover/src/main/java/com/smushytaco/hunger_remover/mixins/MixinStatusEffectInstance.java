@@ -18,11 +18,11 @@ public abstract class MixinStatusEffectInstance {
     @Mutable
     private Holder<MobEffect> effect;
     @Inject(method = "<init>(Lnet/minecraft/core/Holder;IIZZZLnet/minecraft/world/effect/MobEffectInstance;)V", at = @At("TAIL"))
-    private void hookInitializeOne(Holder<MobEffect> effect, int duration, int amplifier, boolean ambient, boolean showParticles, boolean showIcon, MobEffectInstance hiddenEffect, CallbackInfo ci) {
+    private void hookInitializeOne(Holder<MobEffect> effect, int duration, int amplifier, boolean ambient, boolean visible, boolean showIcon, MobEffectInstance hiddenEffect, CallbackInfo ci) {
         if (!HungerRemover.INSTANCE.getConfig().getDisableMod() && HungerRemover.INSTANCE.getConfig().getReplaceAllHungerWithPoison() && effect == MobEffects.HUNGER) this.effect = MobEffects.POISON;
     }
     @Inject(method = "<init>(Lnet/minecraft/world/effect/MobEffectInstance;)V", at = @At("TAIL"))
-    private void hookInitializeTwo(MobEffectInstance instance, CallbackInfo ci) {
+    private void hookInitializeTwo(MobEffectInstance copy, CallbackInfo ci) {
         if (!HungerRemover.INSTANCE.getConfig().getDisableMod() && HungerRemover.INSTANCE.getConfig().getReplaceAllHungerWithPoison() && effect == MobEffects.HUNGER) this.effect = MobEffects.POISON;
     }
 }
